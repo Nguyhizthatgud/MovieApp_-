@@ -1,0 +1,20 @@
+:root {
+  --background-color: #eff0f3;
+  --button-color: #ff8e3c;
+  --button-text: #0d0d0d;
+  --main-layout-color: #eff0f3;
+  --light-coral: #d9376e;
+  --high-light: #ff8e3c;
+  --card-background: #fffffe;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  overflow-x: hidden;
+  background-color: var(--background-color);
+}
