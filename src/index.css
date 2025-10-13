@@ -1,4 +1,5 @@
 @import "tailwindcss";
 
 /* views  css */
-@import "./features/Homepage/views/Homepage.module.css";
+@import "./features/Detailpage/views/Detailpage.css";
+@import "./features/Homepage/views/Homepage.css";

@@ -2,8 +2,9 @@
 import React from 'react';
 import { Row, Col, Card, Button, Typography, Carousel, Space, Form, Input, Flex, Checkbox } from 'antd'
 import { PlayCircleOutlined, StarFilled, UserOutlined } from '@ant-design/icons'
-
+import { useNavigate } from 'react-router-dom';
 import { useUpcomingMovies } from "../controllers/HomepageController.js"
+import "./Homepage.css"
 const { Meta } = Card;
 const { Title, Text } = Typography;
 export const MovieUpcoming = () => {
@@ -12,6 +13,15 @@ export const MovieUpcoming = () => {
         loading: upcomingLoading,
         error: upcomingError
     } = useUpcomingMovies();
+    const navigate = useNavigate();
+    const handleWatchUpcoming = React.useCallback((movie) => {
+        if (!movie || !movie.id) return;
+        navigate(`/movie/${movie.id}`, { state: { movie } });
+    });
+    if (upcomingLoading) {
+        return null;
+    }
+
     return (
         <section className="flex justify-center w-full mx-auto popular-section"
         >
@@ -27,7 +37,7 @@ export const MovieUpcoming = () => {
                     infinite={true}
                     responsive={[]}
                     effect="fade"
-                    className="popular-slider !pb-10"
+                    className="popular-slider custom-carousel !pb-10"
                 >
                     {/* loop card */}
                     {processedMovies && processedMovies.length > 0 &&
@@ -57,6 +67,7 @@ export const MovieUpcoming = () => {
                                                             className="w-full h-64 object-fill"
                                                         />
                                                     }
+                                                    onClick={() => handleWatchUpcoming(movie)}
                                                     actions={[
                                                         <Button
                                                             type="text"

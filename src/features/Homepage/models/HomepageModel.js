@@ -35,12 +35,15 @@ const getGenreOptions = [
     { value: 27, label: 'Horror' },
     { value: 10749, label: 'Romance' }
 ];
-
+const DEFAULT_GENRE_VALUE = 10749;
 const getMovieByGenre = (movies, limit = 20) => {
     return movies
-        .filter(0, limit)
+        .filter(movie => movie.genre === DEFAULT_GENRE_VALUE)
+        .slice(0, limit)
         .map(movie => movie.getDisplayData());
 }
+const getDefaultGenreOption = () =>
+    getGenreOptions.find(option => Number(option.value) === Number(DEFAULT_GENRE_VALUE)) || getGenreOptions[0];
 // Get movie by index (for carousel)
 const getMovieByIndex = (movies, index) => {
 
@@ -73,6 +76,8 @@ export const createHomepageData = (rawData) => {
         getUpcomingMovies: (limit) => getUpcomingMovies(movies, limit),
         getGenreOptions: () => getGenreOptions,
         getMovieByGenre: (limit) => getMovieByGenre(movies, limit),
+        DEFAULT_GENRE_VALUE: () => DEFAULT_GENRE_VALUE,
+        getDefaultGenreOption: () => getDefaultGenreOption(),
         getMovieByIndex: (index) => getMovieByIndex(movies, index),
         getDefaultFeaturedMovie: () => getDefaultFeaturedMovie(movies),
         isValid: () => isValid(movies),

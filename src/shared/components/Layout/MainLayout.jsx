@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Layout } from "antd";
 import Navbar from './HeaderLayout.jsx';
+import FooterLayout from './Footer.jsx';
 const { Header, Content, Footer } = Layout;
 
 const MainLayout = ({ children }) => {
@@ -15,10 +16,12 @@ const MainLayout = ({ children }) => {
             >
                 <Navbar />
             </Header>
-            <Content>
+            <Content className="">
                 {children}
             </Content>
-            <Footer className="footer-layout">Footer</Footer>
+            <Footer className="!bg-gray-900 text-gray-200">
+                <FooterLayout />
+            </Footer>
         </Layout>
     )
 }

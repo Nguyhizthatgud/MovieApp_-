@@ -1,0 +1,70 @@
+.custom-carousel .slick-prev,
+.custom-carousel .slick-next {
+  /* Base styles for arrows */
+  width: 50px !important;
+  height: 50px !important;
+  z-index: 10 !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease !important;
+}
+
+.custom-carousel .slick-prev:after {
+  color: #ffffff !important;
+  transition: all 0.3s ease !important;
+  position: absolute !important;
+  top: 40% !important;
+  left: 40% !important;
+  transform: rotate(-45deg) !important; /* Center the icon */
+  font-size: 24px !important; /* Make arrows bigger */
+  line-height: 1 !important;
+  font-weight: bold !important;
+}
+.custom-carousel .slick-next:after {
+  color: #ffffff !important;
+  transition: all 0.3s ease !important;
+  position: absolute !important;
+  top: 40% !important;
+  left: 35% !important;
+  transform: rotate(135deg) !important; /* Center the icon */
+  font-size: 24px !important; /* Make arrows bigger */
+  font-size: 24px !important; /* Make arrows bigger */
+  line-height: 1 !important;
+  font-weight: bold !important;
+}
+/* Position the circles themselves */
+.custom-carousel .slick-prev {
+  left: -25px !important;
+}
+.custom-carousel .slick-next {
+  right: -25px !important;
+}
+
+/* hover effects */
+.custom-carousel .slick-next:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: #ff4d4f !important;
+  transform: translate(0, -50%) scale(1.2) !important;
+}
+
+.custom-carousel .slick-next:hover:after {
+  color: #ff4d4f !important;
+}
+
+.custom-carousel .slick-prev:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: #ff4d4f !important;
+  transform: translate(0, -50%) scale(1.2) !important;
+}
+
+.custom-carousel .slick-prev:hover:after {
+  color: #ff4d4f !important;
+}
+
+@media (max-width: 768px) {
+  .custom-carousel .slick-prev,
+  .custom-carousel .slick-next {
+    display: none !important;
+  }
+}

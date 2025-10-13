@@ -1,5 +1,4 @@
 
-
 // Security API Configuration
 export const SECURITY_CONFIG = {
 
@@ -28,7 +27,7 @@ export const SECURITY_CONFIG = {
 export const API_CONFIG = {
     VITE_TMDB_BASE_URL: import.meta.env.VITE_TMDB_BASE_URL || 'https://api.themoviedb.org/3',
     VITE_TMDB_IMAGE_BASE_URL: import.meta.env.VITE_TMDB_IMAGE_BASE_URL || 'https://image.tmdb.org/t/p',
-
+    VITE_TMDB_FAVORITE_BASE_URL: import.meta.env.VITE_TMDB_FAVORITE_BASE_URL || 'https://api.themoviedb.org/3/account',
     // Use environment variables in production for security
     API_KEY: import.meta.env.VITE_TMDB_API_KEY,
     ACCESS_TOKEN: import.meta.env.VITE_TMDB_ACCESS_TOKEN,
@@ -61,6 +60,10 @@ export const ENDPOINTS = {
     MOVIE_VIDEOS: (id) => `${API_CONFIG.VITE_TMDB_BASE_URL}/movie/${id}/videos`,
     MOVIE_REVIEWS: (id) => `${API_CONFIG.VITE_TMDB_BASE_URL}/movie/${id}/reviews`,
     MOVIE_RECOMMENDATIONS: (id) => `${API_CONFIG.VITE_TMDB_BASE_URL}/movie/${id}/recommendations`,
+    MOVIE_CAST_AND_CREW: (id) => `${API_CONFIG.VITE_TMDB_BASE_URL}/movie/${id}/credits`,
+    POST_FAVORITE_MOVIES: (accountId) => `${API_CONFIG.VITE_TMDB_FAVORITE_BASE_URL}/${accountId}/favorite`,
+    GET_FAVORITE_MOVIES: (accountId) => `${API_CONFIG.VITE_TMDB_FAVORITE_BASE_URL}/${accountId}/favorite/movies?&sort_by=created_at.asc`,
+
 
     // Search endpoints
     SEARCH_MOVIES: `${API_CONFIG.VITE_TMDB_BASE_URL}/search/movie`,

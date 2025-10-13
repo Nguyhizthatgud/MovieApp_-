@@ -2,20 +2,29 @@
 import React from 'react';
 import { Row, Col, Card, Button, Typography, Carousel, Space, Form, Input, Flex, Checkbox } from 'antd'
 import { PlayCircleOutlined, StarFilled, UserOutlined } from '@ant-design/icons'
-
+import { useNavigate } from 'react-router-dom';
 import { usePopularMovies } from "../controllers/HomepageController.js"
+import "./Homepage.css"
 const { Meta } = Card;
 const { Title, Text } = Typography;
 
 export const MoviePopular = () => {
-
     const {
         processedMovies,
         loading: popularLoading,
         error: popularError
     } = usePopularMovies();
+    const navigate = useNavigate();
+    const handleWatchPopular = React.useCallback((movie) => {
+        if (!movie || !movie.id) return;
+        navigate(`/movie/${movie.id}`, { state: { movie } });
+    });
+    if (popularLoading) {
+        return null;
+    }
+
     return (
-        <section className="flex justify-center w-full mx-auto popular-section"
+        <section className=" flex justify-center w-full mx-auto popular-section"
             style={{ padding: "60px 0 0  0" }}>
             <div className="container">
                 <Title level={2} className="!text-white !mb-6">
@@ -29,7 +38,7 @@ export const MoviePopular = () => {
                     infinite={true}
                     responsive={[]}
                     effect="fade"
-                    className="popular-slider !pb-10"
+                    className="popular-slider custom-carousel !pb-10"
                 >
 
                     {/* loop card */}
@@ -60,6 +69,7 @@ export const MoviePopular = () => {
                                                             className="w-full h-64 object-fill"
                                                         />
                                                     }
+                                                    onClick={() => handleWatchPopular(movie)}
                                                     actions={[
                                                         <Button
                                                             type="text"

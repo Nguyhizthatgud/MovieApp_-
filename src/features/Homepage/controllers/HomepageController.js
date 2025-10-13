@@ -15,15 +15,7 @@ export const useNowPlaying = (params) => {
         const fetchNowPlayingMovies = async () => {
             setLoading(true);
             setError(null);
-
             try {
-                console.log('Fetching now playing movies...');
-                console.log('API Config:', {
-                    baseUrl: API_CONFIG.VITE_TMDB_BASE_URL,
-                    hasToken: !!API_CONFIG.ACCESS_TOKEN,
-                    endpoint: ENDPOINTS.NOW_PLAYING_MOVIES
-                });
-
                 const apiParams = {
                     api_key: API_CONFIG.API_KEY,
                     ...params
@@ -43,11 +35,10 @@ export const useNowPlaying = (params) => {
 
                 // 🔄 Process data through Model
                 const NowPlayingMovies = createHomepageData(response.data);
-                const featured = NowPlayingMovies.getNowPlayingMovies(5);
+                const featured = NowPlayingMovies.getNowPlayingMovies(6);
                 const defaultMovie = NowPlayingMovies.getDefaultFeaturedMovie();
 
-
-
+                console.log('✅ Fetched now playing movies:', response.data);
                 setNowPlayingMovies(NowPlayingMovies);
                 setFeaturedMovies(featured);
                 setCurrentMovie(defaultMovie);
@@ -64,7 +55,6 @@ export const useNowPlaying = (params) => {
     }, [params]);
 
     return {
-        nowPlayingMovies,
         featuredMovies,
         currentMovie,
         loading,
@@ -85,8 +75,6 @@ export const usePopularMovies = (params) => {
             setError(null);
 
             try {
-                console.log('🔄 Fetching popular movies...');
-
                 // TMDB API uses api_key as query parameter
                 const apiParams = {
                     api_key: API_CONFIG.API_KEY,
@@ -107,9 +95,7 @@ export const usePopularMovies = (params) => {
 
                 const homepageData = createHomepageData(response.data);
                 const popular = homepageData.getPopularMovies(40);
-
-
-
+                console.log('✅ Fetched popular movies:', response.data);
                 setPopularMovies(response.data);
                 setProcessedMovies(popular);
 
