@@ -29,7 +29,6 @@ const Loginpage = ({ closeModal }) => {
                     placement: "topRight"
                 });
             };
-            navigate(from, { replace: true });
             openNotificationWithIcon("success");
 
         });
