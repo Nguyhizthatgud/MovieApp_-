@@ -38,13 +38,11 @@ export const useNowPlaying = (params) => {
                 const featured = NowPlayingMovies.getNowPlayingMovies(6);
                 const defaultMovie = NowPlayingMovies.getDefaultFeaturedMovie();
 
-                console.log('✅ Fetched now playing movies:', response.data);
                 setNowPlayingMovies(NowPlayingMovies);
                 setFeaturedMovies(featured);
                 setCurrentMovie(defaultMovie);
 
             } catch (error) {
-                console.error('❌ Error fetching now playing movies:', error);
                 setError(error.message || 'Failed to fetch movies');
             } finally {
                 setLoading(false);
@@ -95,12 +93,11 @@ export const usePopularMovies = (params) => {
 
                 const homepageData = createHomepageData(response.data);
                 const popular = homepageData.getPopularMovies(40);
-                console.log('✅ Fetched popular movies:', response.data);
                 setPopularMovies(response.data);
                 setProcessedMovies(popular);
 
             } catch (error) {
-                console.error('❌ Error fetching popular movies:', error);
+
                 setError(error.message || 'Failed to fetch popular movies');
             } finally {
                 setLoading(false);
@@ -154,7 +151,6 @@ export const useUpcomingMovies = (params) => {
                 setProcessedMovies(upcoming);
 
             } catch (error) {
-                console.error('❌ Error fetching upcoming movies:', error);
                 setError(error.message || 'Failed to fetch upcoming movies');
             } finally {
                 setLoading(false);
@@ -206,8 +202,6 @@ export const useGenreMovie = (genreId, params = {}) => {
 
 
                 const endpoint = ENDPOINTS.DISCOVER_MOVIES;
-                console.log('Fetching genre movies from', endpoint, 'params:', apiParams);
-
                 const response = await axios.get(endpoint, {
                     params: apiParams,
                     headers: { Accept: 'application/json' },
@@ -222,8 +216,6 @@ export const useGenreMovie = (genreId, params = {}) => {
                 setGenreMovies(results);
 
             } catch (err) {
-
-                console.error('Failed to fetch genre movies:', err);
                 setError(err.message || 'Failed to fetch genre movies');
 
             } finally {

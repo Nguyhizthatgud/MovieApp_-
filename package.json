@@ -17,6 +17,7 @@
     "antd": "^5.27.0",
     "axios": "^1.11.0",
     "form4antdesign": "^1.0.13",
+    "netlify": "^23.9.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.62.0",
