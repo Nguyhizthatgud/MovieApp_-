@@ -27,11 +27,6 @@ export const MovieGenre = () => {
     }, [defaultGenreOption]);
 
     const { genreMovies, loading, error, currentGenreMovies } = useGenreMovie(genreId);
-    React.useEffect(() => {
-        return () => {
-            console.log('genreId changed:', genreId);
-        }
-    }, [genreId])
     const handleWatchGenre = React.useCallback((movie) => {
         if (!movie || !movie.id) return;
         navigate(`/movie/${movie.id}`, { state: { movie } });

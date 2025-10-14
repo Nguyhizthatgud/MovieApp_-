@@ -78,12 +78,9 @@ export const useFavoriteMovies = () => {
                 ...prev,
                 totalResults: prev.totalResults - 1
             }));
-
-            console.log('Movie removed from favorites:', response.data);
             return response.data;
 
         } catch (error) {
-            console.error('Error removing from favorites:', error);
             throw error;
         } finally {
             setLoading(false);
