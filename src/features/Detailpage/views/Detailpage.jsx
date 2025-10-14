@@ -20,8 +20,8 @@ const Detailpage = () => {
     const [videoSrc, setVideoSrc] = useState('');
 
     // set loading & scroll up on mount 
-    const [showContent, setShowContent] = React.useState(false);
-    const [isDelayComplete, setIsDelayComplete] = React.useState(false);
+    const [imageLoading, setImageLoading] = useState(true);
+
     const [api, contextHolder] = notification.useNotification();
     React.useEffect(() => {
         window.scrollTo(0, 0);
@@ -108,26 +108,19 @@ const Detailpage = () => {
             setSelectedTrailer(null);
         }, 100);
     };
-    React.useEffect(() => {
-        if (!loading && !error) {
-            // Add a delay before showing content
-            const delayTimer = setTimeout(() => {
-                setIsDelayComplete(true);
-                // Add another small delay for smooth transition
-                const contentTimer = setTimeout(() => {
-                    setShowContent(true);
-                }, 300);
-
-                return () => clearTimeout(contentTimer);
-            }, 1000); // 1 second delay after loading completes
-
-            return () => clearTimeout(delayTimer);
-        } else {
-            // Reset states when loading starts again
-            setShowContent(false);
-            setIsDelayComplete(false);
+    useEffect(() => {
+        if (posterUrl) {
+            setImageLoading(true);
         }
-    }, [loading, error]);
+    }, [posterUrl]);
+
+    const handleImageLoad = () => {
+        setImageLoading(false);
+    };
+
+    const handleImageError = () => {
+        setImageLoading(false);
+    };
 
     if (error) {
         return (
@@ -182,11 +175,23 @@ const Detailpage = () => {
                         <Col xs={24} md={8} lg={6}>
                             <div className="flex justify-center">
                                 {posterUrl ? (
-                                    <img
-                                        src={posterUrl}
-                                        alt={movie.title}
-                                        className="w-full max-w-sm rounded-xl shadow-2xl"
-                                    />
+                                    <div className="relative w-full max-w-sm">
+                                        {/* Show spinner while image is loading */}
+                                        {imageLoading && (
+                                            <div className="absolute inset-0 bg-gray-700 rounded-xl flex items-center justify-center z-10">
+                                                <Spin size="large" />
+                                            </div>
+                                        )}
+
+                                        <img
+                                            src={posterUrl}
+                                            alt={movie.title}
+                                            className={`w-full rounded-xl shadow-2xl transition-opacity duration-300 ${imageLoading ? 'opacity-0' : 'opacity-100'
+                                                }`}
+                                            onLoad={handleImageLoad}
+                                            onError={handleImageError}
+                                        />
+                                    </div>
                                 ) : (
                                     <div className="w-full max-w-sm h-96 bg-gray-700 rounded-xl flex items-center justify-center">
                                         <Text className="text-gray-400">No poster available</Text>
@@ -295,13 +300,13 @@ const Detailpage = () => {
                                         </Tooltip> : 'Login to favorite'}
                                         {isFavorite ? 'Favorited' : 'Add to Favorites'}
                                     </Button>
-
                                 </div>
                             </Space>
                         </Col>
                     </Row>
                 </div>
             </div>
+
 
 
 

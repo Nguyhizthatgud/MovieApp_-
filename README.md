@@ -145,15 +145,6 @@ src/
 
 ---
 
-## For Portfolio / Presentation
-
-- Highlight the architecture in your README and portfolio: MVC + feature-based separation is the main takeaway.
-- Show controller hooks and a sample `shared/api/config.js` to demonstrate how data flows from API → controller → view.
-- Include screenshots and a short video walkthrough focusing on:
-  - Favorites workflow (add/remove)
-  - Detail page (data composition from controllers)
-  - Project folder structure and where to add new features
-
 ---
 
 ## Contributing

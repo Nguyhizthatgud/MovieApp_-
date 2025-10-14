@@ -4,14 +4,14 @@ import { API_CONFIG, ENDPOINTS } from '../../../shared/api/config.js'
 import axios from 'axios'
 export const useDetailPage = (params) => {
     const [movie, setMovie] = useState([]);
-    const [loading, setLoading] = useState()
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null)
     const [video, setVideo] = useState([]);
     const [cast, setCast] = useState([]);
-
-
     useEffect(() => {
         const fetchDetails = async () => {
+            setLoading(true);
+            setError(null);
             try {
                 const response = await axios.get(
                     ENDPOINTS.MOVIE_DETAILS(params),
@@ -22,7 +22,6 @@ export const useDetailPage = (params) => {
                     }
                 )
                 setMovie(response.data);
-                console.log('Movie details fetched:', response.data);
             } catch (error) {
                 setError(error.message || 'Failed to fetch movie details');
                 setLoading(false);
@@ -42,7 +41,6 @@ export const useDetailPage = (params) => {
                     }
                 )
                 setVideo(response.data.results);
-                console.log('Movie videos fetched:', response.data.results);
             } catch (error) {
                 setError(error.message || 'Failed to fetch movie videos');
                 setLoading(false);
@@ -62,7 +60,6 @@ export const useDetailPage = (params) => {
                     }
                 )
                 setCast(response.data.cast);
-                console.log('Movie cast fetched:', response.data.cast);
             } catch (error) {
                 setError(error.message || 'Failed to fetch movie cast');
                 setLoading(false);
@@ -107,12 +104,10 @@ export const useFavorite = (params) => {
 
                 // check if current movie is in favorites
                 setFavoriteMovies(response.data.results || []);
-                console.log('Favorite status checked:', favoriteMovies);
                 const isFav = response.data.results.some(movie => movie.id === parseInt(params));
                 setIsFavorite(isFav);
             } catch (error) {
                 setError(error.message || 'Failed to check favorite status');
-                console.error('Error checking favorite status:', error);
             } finally {
                 setLoading(false);
             }
@@ -144,7 +139,6 @@ export const useFavorite = (params) => {
                 }
             )
             setIsFavorite(true);
-            console.log('Movie added to favorites:', response.data);
             return response.data;
         } catch (error) {
             setError(error.message || 'Failed to add movie to favorites');
@@ -177,8 +171,6 @@ export const useFavorite = (params) => {
                 }
             )
             setIsFavorite(false);
-
-            console.log('Movie removed from favorites:', response.data);
             return response.data;
         } catch (error) {
             setError(error.message || 'Failed to remove movie from favorites');
@@ -190,6 +182,11 @@ export const useFavorite = (params) => {
     const handleFavoriteToggle = async () => {
         if (isFavorite) {
             return await removeFavorite();
+            api.success({
+                message: "Xoá khỏi danh sách yêu thích!",
+                description: `Đã xoá ${movie.title} khỏi danh sách yêu thích!`,
+                placement: "topRight"
+            });
         } else {
             return await addFavorite();
         }
@@ -209,7 +206,6 @@ export const useFavorite = (params) => {
             )
             const favoriteMovies = response.data.results;
             setFavoriteMovies(favoriteMovies);
-            console.log('Favorite status checked:', favoriteMovies);
         } catch (error) {
             setError(error.message || 'Failed to check favorite status');
             setLoading(false);
