@@ -8,6 +8,8 @@ Designed for portfolio presentation and educational purposes — shows how to st
 ## Key Points
 
 - Architecture: MVC (Model - View - Controller) combined with Feature-Based organization
+- Focus: Maintainability, scalability, testability, separation of concerns
+- Security: Environment variable management and Front-end security issues
 - Purpose: Portfolio / education — clean code, clear separation of concerns, testable units
 - Primary tech: React, Vite, Ant Design, Tailwind CSS, Axios, React Router
 

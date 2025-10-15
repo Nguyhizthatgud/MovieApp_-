@@ -144,7 +144,7 @@ export default defineConfig({
 
    ```javascript
    // BAD - Don't do this!
-   const API_KEY = "ac3395fe6e59218331dbbe8dcefabab3";
+   const API_KEY = "hardcoded_api";
    ```
 
 3. **Never share .env files directly**
