@@ -38,3 +38,6 @@ secrets/
 
 # Local Netlify folder
 .netlify
+".env" 
+".env.local" 
+".env.production" 
