@@ -109,12 +109,12 @@ const createApiClient = (baseURL, defaultHeaders = {}) => {
 };
 
 // TMDB API client
-export const tmdbClient = createApiClient("https://api.themoviedb.org/3", {
-  Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}`
-});
+// export const tmdbClient = createApiClient("https://api.themoviedb.org/3", {
+//   Authorization: `Bearer ${import.meta.env.VITE_TMDB_ACCESS_TOKEN}`
+// });
 
 // Your app's backend API client (if you have one)
-export const appApiClient = createApiClient(import.meta.env.VITE_API_BASE_URL || "http://localhost:3001/api");
+// export const appApiClient = createApiClient(import.meta.env.VITE_API_BASE_URL || "http://localhost:3001/api");
 
 export default tmdbClient;
 ```

@@ -51,14 +51,14 @@ Create/update your `.env` file:
 
 ```env
 # 🔐 API Configuration
-VITE_TMDB_API_KEY=your_secure_api_key_here
+<!-- VITE_TMDB_API_KEY=your_secure_api_key_here
 VITE_TMDB_ACCESS_TOKEN=your_secure_access_token_here
-VITE_TMDB_BASE_URL=https://api.themoviedb.org/3
+VITE_TMDB_BASE_URL="xxx"
 
 # 🔒 Security Configuration
-VITE_ENABLE_HTTPS=true
+<!-- VITE_ENABLE_HTTPS=true
 VITE_CSP_REPORT_URI=https://your-domain.com/csp-report
-VITE_ENVIRONMENT=production
+VITE_ENVIRONMENT=production -->
 ```
 
 ### 3. **Input Validation & Sanitization**

@@ -24,10 +24,10 @@ npm install axios
 Create `.env` file in your project root:
 
 ```env
-# TMDB API Configuration
+<!-- # TMDB API Configuration
 VITE_TMDB_API_KEY=your_bearer_token_here
 VITE_TMDB_BASE_URL=https://api.themoviedb.org/3
-VITE_TMDB_IMAGE_BASE_URL=https://image.tmdb.org/t/p
+VITE_TMDB_IMAGE_BASE_URL=https://image.tmdb.org/t/p -->
 ```
 
 ## 📁 Step 3: Project Structure
@@ -52,15 +52,15 @@ src/
 import axios from "axios";
 
 // Create axios instance with TMDB configuration
-const tmdbApi = axios.create({
-  baseURL: import.meta.env.VITE_TMDB_BASE_URL || "https://api.themoviedb.org/3",
-  timeout: 10000,
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
-    Accept: "application/json"
-  }
-});
+// const tmdbApi = axios.create({
+//   baseURL: import.meta.env.VITE_TMDB_BASE_URL || "https://api.themoviedb.org/3",
+//   timeout: 10000,
+//   headers: {
+//     "Content-Type": "application/json",
+//     Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
+//     Accept: "application/json"
+//   }
+// });
 
 // Request interceptor
 tmdbApi.interceptors.request.use(
