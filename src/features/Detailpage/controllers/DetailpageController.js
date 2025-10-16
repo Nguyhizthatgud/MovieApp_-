@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { API_CONFIG, ENDPOINTS } from '../../../shared/api/config.js'
+import {
+    API_CONFIG,
+    SECURITY_CONFIG,
+    ENDPOINTS,
+    getDefaultHeaders,
+    getDefaultOptions,
+    buildUrl,
+    apiRequest
+} from '../../../shared/api/config.js'
 import axios from 'axios'
 export const useDetailPage = (params) => {
     const [movie, setMovie] = useState([]);
@@ -13,14 +21,7 @@ export const useDetailPage = (params) => {
             setLoading(true);
             setError(null);
             try {
-                const response = await axios.get(
-                    ENDPOINTS.MOVIE_DETAILS(params),
-                    {
-                        headers: {
-                            'Authorization': `Bearer ${API_CONFIG.ACCESS_TOKEN}`
-                        }
-                    }
-                )
+                const response = await apiRequest(ENDPOINTS.MOVIE_DETAILS(params));
                 setMovie(response.data);
             } catch (error) {
                 setError(error.message || 'Failed to fetch movie details');
@@ -29,17 +30,11 @@ export const useDetailPage = (params) => {
         }
         fetchDetails();
     }, [params]);
+
     useEffect(() => {
         const fetchVideos = async () => {
             try {
-                const response = await axios.get(
-                    ENDPOINTS.MOVIE_VIDEOS(params),
-                    {
-                        headers: {
-                            'Authorization': `Bearer ${API_CONFIG.ACCESS_TOKEN}`
-                        }
-                    }
-                )
+                const response = await apiRequest(ENDPOINTS.MOVIE_VIDEOS(params));
                 setVideo(response.data.results);
             } catch (error) {
                 setError(error.message || 'Failed to fetch movie videos');
@@ -48,17 +43,11 @@ export const useDetailPage = (params) => {
         }
         fetchVideos();
     }, [params]);
+
     useEffect(() => {
         const fetchCast = async () => {
             try {
-                const response = await axios.get(
-                    ENDPOINTS.MOVIE_CAST_AND_CREW(params),
-                    {
-                        headers: {
-                            'Authorization': `Bearer ${API_CONFIG.ACCESS_TOKEN}`
-                        }
-                    }
-                )
+                const response = await apiRequest(ENDPOINTS.MOVIE_CAST_AND_CREW(params));
                 setCast(response.data.cast);
             } catch (error) {
                 setError(error.message || 'Failed to fetch movie cast');
@@ -82,28 +71,20 @@ export const useFavorite = (params) => {
     const [favoriteMovies, setFavoriteMovies] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const accountId = import.meta.env.VITE_ACCOUNT_ID;
+
 
     // check favorite movie status on mount 
     useEffect(() => {
         const checkFavoriteStatus = async () => {
-            if (!params || !accountId) return;
+            if (!params) return;
 
             try {
                 setLoading(true);
                 setError(null);
 
-                const response = await axios.get(
-                    ENDPOINTS.GET_FAVORITE_MOVIES(accountId),
-                    {
-                        headers: {
-                            'Authorization': `Bearer ${API_CONFIG.ACCESS_TOKEN}`, 'Content-Type': 'application/json'
-                        }
-                    }
-                );
-
-                // check if current movie is in favorites
+                const response = await apiRequest(ENDPOINTS.GET_FAVORITE_MOVIES(accountId));
                 setFavoriteMovies(response.data.results || []);
+                // check if current movie is in favorites
                 const isFav = response.data.results.some(movie => movie.id === parseInt(params));
                 setIsFavorite(isFav);
             } catch (error) {
@@ -116,28 +97,19 @@ export const useFavorite = (params) => {
     }, [params, accountId]);
 
     //add favorite movie
-    const addFavorite = async () => {
-        if (!params || !accountId) return;
-        const movieId = parseInt(params);
+    const addFavorite = async (accountId, movieId) => {
+        if (!params) return;
         try {
             setLoading(true);
             setError(null);
-            const movieId = parseInt(params);
-            const accountId = import.meta.env.VITE_ACCOUNT_ID;
-            const response = await axios.post(
-                ENDPOINTS.POST_FAVORITE_MOVIES(accountId),
-                {
-                    "media_type": 'movie',
-                    "media_id": movieId,
-                    "favorite": true
-                },
-                {
-                    headers: {
-                        'Authorization': `Bearer ${API_CONFIG.ACCESS_TOKEN}`,
-                        'Content-Type': 'application/json'
-                    }
-                }
-            )
+            const response = await apiRequest(ENDPOINTS.POST_FAVORITE_MOVIES(accountId), {
+                method: 'POST',
+                body: JSON.stringify({
+                    media_type: 'movie',
+                    media_id: movieId,
+                    favorite: true
+                })
+            });
             setIsFavorite(true);
             return response.data;
         } catch (error) {
@@ -148,26 +120,22 @@ export const useFavorite = (params) => {
     };
 
     // remove favorite movie
-    const removeFavorite = async () => {
-        if (!params || !accountId) return;
-        const movieId = parseInt(params);
+    const removeFavorite = async (accountId, movieId) => {
+        if (!params) return;
         try {
             setLoading(true);
             setError(null);
             const movieId = parseInt(params);
             const accountId = import.meta.env.VITE_ACCOUNT_ID;
-            const response = await axios.post(
+            const response = await apiRequest(
                 ENDPOINTS.POST_FAVORITE_MOVIES(accountId),
                 {
-                    "media_type": 'movie',
-                    "media_id": movieId,
-                    "favorite": false
-                },
-                {
-                    headers: {
-                        'Authorization': `Bearer ${API_CONFIG.ACCESS_TOKEN}`,
-                        'Content-Type': 'application/json'
-                    }
+                    method: 'POST',
+                    body: JSON.stringify({
+                        media_type: 'movie',
+                        media_id: movieId,
+                        favorite: false
+                    })
                 }
             )
             setIsFavorite(false);
@@ -194,7 +162,6 @@ export const useFavorite = (params) => {
     // get favorite movies list
     const getFavoriteMovies = async () => {
         try {
-            const accountId = import.meta.env.VITE_ACCOUNT_ID;
             const response = await axios.get(
                 ENDPOINTS.GET_FAVORITE_MOVIES(accountId),
                 {
