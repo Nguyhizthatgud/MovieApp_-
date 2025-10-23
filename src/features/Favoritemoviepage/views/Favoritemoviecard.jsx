@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, Button, Rate, Tag, Tooltip, Image } from 'antd';
 import { HeartFilled, CalendarOutlined, StarOutlined, EyeOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-
+import placeholderImage from "../../../assets/placeholder-movie.svg";
 const { Meta } = Card;
 
 const FavoriteMovieCard = ({ movie, onRemove, loading }) => {
@@ -19,7 +19,7 @@ const FavoriteMovieCard = ({ movie, onRemove, loading }) => {
 
     const posterUrl = movie.poster_path
         ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-        : '/placeholder-poster.jpg';
+        : placeholderImage;
 
     const releaseYear = movie.release_date ? new Date(movie.release_date).getFullYear() : 'N/A';
     const rating = movie.vote_average ? (movie.vote_average / 2).toFixed(1) : 0;

@@ -4,7 +4,7 @@ import { Row, Col, Card, Button, Typography, Carousel, Space, Form, Input, Flex,
 import { PlayCircleOutlined, StarFilled, UserOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom';
 import { usePopularMovies } from "../controllers/HomepageController.js"
-import "./Homepage.css"
+import "./arrow-slick.css"
 const { Meta } = Card;
 const { Title, Text } = Typography;
 
@@ -65,7 +65,7 @@ export const MoviePopular = () => {
                                                     cover={
                                                         <img
                                                             alt={movie.title}
-                                                            src={`https://image.tmdb.org/t/p/w500${movie.posterUrl}`}
+                                                            src={movie.posterUrl ? `https://image.tmdb.org/t/p/w500${movie.posterUrl}` : "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='450' viewBox='0 0 300 450'%3E%3Crect width='300' height='450' fill='%23374151'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='16' fill='%23ffffff'%3ENo Image%3C/text%3E%3C/svg%3E"}
                                                             className="w-full h-64 object-fill"
                                                         />
                                                     }

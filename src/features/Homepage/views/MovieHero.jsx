@@ -6,6 +6,7 @@ import LoginForm from './LoginForm.jsx'
 import { useForm, Controller } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom'
 import useAuth from '../../../app/hooks/useAuth.jsx';
+import geminiLogo from "../../../assets/Maskgroup.svg";
 const { Title, Text } = Typography;
 const { Meta } = Card;
 
@@ -49,7 +50,9 @@ export const MovieHero = () => {
                         <div
                             className="h-190 bg-cover relative"
                             style={{
-                                backgroundImage: `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url(https://image.tmdb.org/t/p/w1280${movie.backdropUrl})`,
+                                backgroundImage: movie.backdropUrl
+                                    ? `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url(https://image.tmdb.org/t/p/w1280${movie.backdropUrl})`
+                                    : `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e40af 100%)`,
                             }}
                         >
                         </div>
@@ -64,7 +67,9 @@ export const MovieHero = () => {
                                 Hi There.
                             </Title>
                             <Title level={4} className="!text-white text-3xl !mb-40 ">
-                                Millions of movies, TV shows and people to discover. Explore now.
+                                <div className="">
+                                    There are millions of films, TV series, and individuals to find.<br /> <span className="flex items-baseline">With <img src={geminiLogo} alt='Gemini logo' className="w-24 inline-block !mx-2" /> Search for movies.</span>
+                                </div>
                             </Title>
                         </div>
 

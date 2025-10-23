@@ -63,14 +63,14 @@ const Homepage = () => {
             <div className="min-h-screen bg-gray-900 flex items-center justify-center">
                 <div className="text-center space-y-6">
                     <Spin size="large" />
-                    <div className="text-white">
+                    <div className="!text-white">
                         <div className="text-xl mb-2">Loading Homepage...</div>
                         <Progress
                             percent={progress}
                             status="active"
                             strokeColor="#1890ff"
                         />
-                        <div className="text-sm mt-2">
+                        <div className="text-sm mt-2 !text-white">
                             {completedCount}/3 sections loaded
                         </div>
                     </div>
@@ -92,7 +92,7 @@ const Homepage = () => {
                             status="success"
                             strokeColor="#52c41a"
                         />
-                        <div className="text-sm mt-2">
+                        <div className="text-sm mt-2 !text-white">
                             Ready to go! 🎬
                         </div>
                     </div>

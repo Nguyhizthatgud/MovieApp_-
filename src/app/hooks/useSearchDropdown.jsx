@@ -27,7 +27,6 @@ export const useSearchDropdown = () => {
 
     const openDropdown = useCallback(() => {
         setIsOpen(true);
-        setSelectedIndex(-1);
     }, []);
 
     const closeDropdown = useCallback(() => {
@@ -38,6 +37,7 @@ export const useSearchDropdown = () => {
     // handle movie selection
     const handleMovieSelect = useCallback((movie) => {
         navigate(`/movie/${movie.id}`);
+        console.log('Selected movie to open:', movie);
         closeDropdown();
     }, [navigate, closeDropdown]);
 

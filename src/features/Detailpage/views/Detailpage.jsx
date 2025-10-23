@@ -7,6 +7,7 @@ import { API_CONFIG, ENDPOINTS } from '../../../shared/api/config.js'
 import { useDetailPage, useFavorite } from '../controllers/DetailpageController.js'
 import useAuth from '../../../app/hooks/useAuth.jsx'
 import "./Detailpage.css"
+import placeholderImage from "../../../assets/placeholder-movie.svg";
 const { Title, Text, Paragraph } = Typography
 
 const Detailpage = () => {
@@ -289,8 +290,8 @@ const Detailpage = () => {
                                         icon={isFavorite ? <HeartFilled /> : <HeartOutlined />}
                                         loading={favoriteLoading}
                                         className={`font-semibold px-8 py-6 h-auto ${isFavorite
-                                            ? '!bg-pink-600 hover:bg-pink-700 !border-pink-600 !text-white'
-                                            : '!bg-gray-700 hover:bg-gray-600 !order-gray-600 !text-white'
+                                            ? '!bg-pink-600 hover:!bg-pink-700 !border-pink-600 !text-white'
+                                            : '!bg-gray-700 hover:!bg-gray-600 !border-gray-600 !text-white'
                                             }`}
 
                                         disabled={!user}
@@ -343,7 +344,7 @@ const Detailpage = () => {
                                         {cast && cast.map((member) => (
                                             <div key={member.id} className="flex items-center gap-2">
                                                 <img
-                                                    src={member.profile_path ? `${API_CONFIG.VITE_TMDB_IMAGE_BASE_URL}/w92${member.profile_path}` : 'https://via.placeholder.com/48x48?text=No+Image'}
+                                                    src={member.profile_path ? `${API_CONFIG.VITE_TMDB_IMAGE_BASE_URL}/w92${member.profile_path}` : placeholderImage}
                                                     alt={member.name}
                                                     className="w-12 h-12 rounded-full object-cover"
                                                 />
@@ -559,7 +560,7 @@ const Detailpage = () => {
 
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             {(movie.production_companies || movie.productionCompanies || []).slice(0, 6).map((company, index) => (
-                                                <div key={index} className="flex items-center gap-4 !m  -4 bg-gray-700 rounded-lg border border-gray-600 hover:border-purple-400 transition-colors">
+                                                <div key={index} className="flex items-center gap-4 !p-4 bg-gray-700 rounded-lg border border-gray-600 hover:border-purple-400 transition-colors">
                                                     {/* Company Logo */}
                                                     <div className="flex-shrink-0">
                                                         {company.logo_path ? (
@@ -637,10 +638,10 @@ const Detailpage = () => {
                             {/* Trailer Header */}
                             <div className="bg-dark px-4 py-3 flex items-center justify-between">
                                 <div>
-                                    <Title level={3} className="!text-white !m-3">
+                                    <Title level={3} className="!text-white !mb-0">
                                         {movie.title}
                                     </Title>
-                                    <Text className="!text-white !m-3">
+                                    <Text className="!text-gray-300">
                                         {selectedTrailer.name || 'Official Trailer'}
                                     </Text>
                                 </div>
@@ -648,7 +649,7 @@ const Detailpage = () => {
                                     type="text"
                                     icon={<CloseOutlined />}
                                     onClick={closeTrailerModal}
-                                    className="!text-white !m-3u  hover:text-gray-300"
+                                    className="!text-white hover:!text-gray-300"
                                     size="large"
                                 />
                             </div>
@@ -667,12 +668,6 @@ const Detailpage = () => {
                     )}
                 </Modal>
             </div>
-
-
-
-
-
-
         </section>
     )
 }

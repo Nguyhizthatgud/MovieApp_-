@@ -1,4 +1,5 @@
 // src/features/Homepage/models/Movie.js
+import placeholderImage from "../../../assets/placeholder-movie.svg";
 export class Movie {
     constructor(movieData) {
         this.data = { ...movieData };
@@ -39,7 +40,7 @@ export class Movie {
     // DATA TRANSFORMATION: Get poster URL
     getPosterUrl(size = 'w500') {
         if (!this.data.poster_path) {
-            return '/images/no-poster-placeholder.jpg';
+            return placeholderImage;
         }
         return `https://image.tmdb.org/t/p/${size}${this.data.poster_path}`;
     }
@@ -47,7 +48,7 @@ export class Movie {
     // DATA TRANSFORMATION: Get backdrop URL
     getBackdropUrl(size = 'w1280') {
         if (!this.data.backdrop_path) {
-            return '/images/no-backdrop-placeholder.jpg';
+            return placeholderImage;
         }
         return `https://image.tmdb.org/t/p/${size}${this.data.backdrop_path}`;
     }

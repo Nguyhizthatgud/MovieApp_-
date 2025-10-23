@@ -1,12 +1,12 @@
 import React from "react";
-
+import LiveTV from "../../../assets/LiveTV.svg";
 const FooterLayout = () => {
     return (
         <section className="relative flex justify-center mx-auto w-full">
             <div className="container flex flex-col md:flex-row justify-between items-start gap-6 py-6 px-6 md:px-12 border-t border-gray-800">
                 <div className="w-full my-auto !mt-3">
                     <div className="flex items-center gap-3">
-                        <img src="../../../../LiveTV.svg" alt="Logo" className="h-8" />
+                        <img src={LiveTV} alt="Logo" className="h-8" />
                         <div>
                             <div className="text-lg font-semibold text-white">MovieApp - 时间如水</div>
                             <div className="text-sm text-gray-400">Educational Project • Portfolio Demo</div>

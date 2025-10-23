@@ -16,6 +16,7 @@ import { HeartOutlined, ReloadOutlined, HomeOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useFavoriteMovies } from '../controllers/FavoritesController.jsx';
 import FavoriteMovieCard from './Favoritemoviecard.jsx';
+import bg2 from '../../../assets/bg2.svg';
 const { Title, Text } = Typography;
 
 const FavoritesPage = () => {
@@ -85,7 +86,7 @@ const FavoritesPage = () => {
 
     return (
         <div className="min-h-screen !pt-24 relative"
-            style={{ background: 'no-repeat center/cover url("../../../../bg2.svg")' }}>
+            style={{ background: `no-repeat center/cover url(${bg2})` }}>
             {contextHolder}
             <div className="absolute inset-0 bg-black/50 z-0"></div>
             {/* Header Section */}

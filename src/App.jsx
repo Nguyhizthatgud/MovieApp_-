@@ -9,7 +9,7 @@ import FavoritesPage from "./features/Favoritemoviepage/views/Favoritepage.jsx";
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <Router basename="/MovieApp_-">
         <Routes>
           {/* public route */}
           <Route path="/" element={<MainLayout children={<Homepage />} />} />

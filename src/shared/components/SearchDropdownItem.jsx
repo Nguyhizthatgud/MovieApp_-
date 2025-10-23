@@ -4,22 +4,29 @@ import { StarFilled } from '@ant-design/icons';
 import { IoFilmOutline } from 'react-icons/io5';
 import { API_CONFIG } from '../api/config.js';
 import { Dropdown, Space } from 'antd';
-
-export const SearchDropdownItem = ({
+import placeholderImage from '../../assets/placeholder-movie.svg';
+export const SearchDropdownItem = React.forwardRef(({
     loading,
     error,
     searchResults,
     movieSearchValue,
     selectedIndex,
     onMovieSelect,
-    onViewAllResults
-}) => {
+    onViewAllResults,
+    searchingService
+}, ref) => {
     return (
-        <div className="absolute top-full left-0 right-0 bg-white shadow-lg rounded-2xl z-50 border border-t-0 max-h-96 overflow-y-auto !p-2">
+        <div
+            ref={ref}
+            className="absolute top-full left-0 right-0 bg-white shadow-lg rounded-2xl z-50 border border-t-0 max-h-96 overflow-y-auto !p-2"
+        >
             {loading ? (
                 <div className="!p-4 text-center">
                     <Spin />
-                    <p className="mt-2 text-gray-500 text-sm">Searching for "{movieSearchValue}"...</p>
+                    <p className="mt-2 text-gray-500 text-sm">
+                        Searching for "{movieSearchValue}"
+                        {searchingService === 'gemini' ? ' with Gemini in a few seconds' : '...'}
+                    </p>
                 </div>
             ) : error ? (
                 <div className="!p-4 text-center">
@@ -49,12 +56,12 @@ export const SearchDropdownItem = ({
                                 <img
                                     src={movie.poster_path
                                         ? `${API_CONFIG.VITE_TMDB_IMAGE_BASE_URL}/w92${movie.poster_path}`
-                                        : '/placeholder-movie.jpg'
+                                        : placeholderImage
                                     }
                                     alt={movie.title}
                                     className="w-12 h-16 object-cover rounded shadow-sm !m-1"
                                     onError={(e) => {
-                                        e.target.src = '/placeholder-movie.jpg';
+                                        e.target.src = placeholderImage;
                                     }}
                                 />
                             </div>
@@ -93,6 +100,9 @@ export const SearchDropdownItem = ({
                 </div>
             )}
         </div>
-    )
-}
+    );
+});
+
+// Add display name for better debugging
+SearchDropdownItem.displayName = 'SearchDropdownItem';
 

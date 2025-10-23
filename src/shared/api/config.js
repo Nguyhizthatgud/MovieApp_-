@@ -26,11 +26,13 @@ export const SECURITY_CONFIG = {
 
 export const API_CONFIG = {
     VITE_TMDB_BASE_URL: import.meta.env.VITE_TMDB_BASE_URL || 'https://api.themoviedb.org/3',
+    VITE_GEMINI_BASE_URL: import.meta.env.VITE_GEMINI_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta/models',
     VITE_TMDB_IMAGE_BASE_URL: import.meta.env.VITE_TMDB_IMAGE_BASE_URL || 'https://image.tmdb.org/t/p',
     VITE_TMDB_FAVORITE_BASE_URL: import.meta.env.VITE_TMDB_FAVORITE_BASE_URL || 'https://api.themoviedb.org/3/account',
     // Use environment variables in production for security
     API_KEY: import.meta.env.VITE_TMDB_API_KEY,
     ACCESS_TOKEN: import.meta.env.VITE_TMDB_ACCESS_TOKEN,
+    GEMINI_API_KEY: import.meta.env.VITE_GEMINI_API_KEY
 };
 
 
@@ -44,6 +46,7 @@ export const DEFAULT_OPTIONS = {
     timeout: SECURITY_CONFIG.MAX_REQUEST_TIMEOUT,
     credentials: 'same-origin' // Important for CSRF protection
 };
+
 
 /**
  * 🎯 API Endpoints Configuration
@@ -68,6 +71,8 @@ export const ENDPOINTS = {
     // Search endpoints
     SEARCH_MOVIES: `${API_CONFIG.VITE_TMDB_BASE_URL}/search/movie`,
     SEARCH_MULTI: `${API_CONFIG.VITE_TMDB_BASE_URL}/search/multi`,
+    // SEARCH_MOVIE_AI: (query) => `${API_CONFIG.VITE_GEMINI_BASE_URL}/gemini-2.0-flash:generateContent?key=${API_CONFIG.GEMINI_API_KEY}&prompt=${encodeURIComponent(query)}`,
+    SEARCH_MOVIE_AI: (query) => `${API_CONFIG.VITE_GEMINI_BASE_URL}/gemini-2.5-flash:generateContent?key=${API_CONFIG.GEMINI_API_KEY}`,
 
     // Genre endpoints
     MOVIE_GENRES: `${API_CONFIG.VITE_TMDB_BASE_URL}/genre/movie/list`,

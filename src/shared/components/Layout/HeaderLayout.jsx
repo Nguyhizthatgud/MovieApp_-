@@ -7,7 +7,8 @@ import useAuth from "../../../app/hooks/useAuth";
 import { AppstoreOutlined, UnlockOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Button, Avatar, Dropdown, Modal } from "antd";
 
-import { IoFilmOutline } from "react-icons/io5";
+import { SiGooglegemini } from "react-icons/si";
+import { VideoCameraOutlined } from '@ant-design/icons';
 import Loginpage from "../../../features/LoginPage/views/LoginPage.jsx";
 import { useDropdownMenu } from "../../../app/hooks/useDropdownMenu";
 import { useNavbarActions } from "../../../app/hooks/useNavbarAction";
@@ -17,6 +18,7 @@ import { AvatarMenuItem } from "../AvatarMenuItem.jsx";
 import { useSearchMovie } from "../../../app/hooks/useSearchMovie";
 import { useSearchDropdown } from "../../../app/hooks/useSearchDropdown";
 import { SearchDropdownItem } from "../SearchDropdownItem.jsx";
+import logo2 from "../../../assets/logo2.svg";
 const Navbar = () => {
   const methods = useForm({
     defaultValues: { moviesSearch: "" }
@@ -26,16 +28,16 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dropdown = useDropdownMenu();
   const { handleMenuAction, handleGroupOption, modal, closeModal } = useNavbarActions();
-  const { searchResults, loading, error, clearSearch } = useSearchMovie(movieSearchValue);
+  const { searchResults, loading, error, clearSearch, searchingService } = useSearchMovie(movieSearchValue);
 
   const handleModalClose = () => {
     closeModal();
   };
   const {
     isOpen,
+    inputRef,
     selectedIndex,
     dropdownRef,
-    inputRef,
     openDropdown,
     closeDropdown,
     handleMovieSelect,
@@ -77,21 +79,23 @@ const Navbar = () => {
     <section className="header-section container flex items-center justify-between h-16">
       <div className="logo flex items-center gap-3">
 
-        <img src="../../../../logo2.svg" alt="Logo" className="h-8"
-          onClick={() => navigate('/')} />
+        <img
+          src={logo2}
+          alt="MovieApp Logo"
+          className="h-10 w-auto cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={() => navigate('/')}
+        />
         {user ? (
           <FormProvider methods={methods}>
             <div className="logo-text flex items-center relative" ref={dropdownRef}>
               <FormTextField
-                ref={inputRef}
                 name="moviesSearch"
-                placeholder="Tìm phim ..."
-                prefix={loading ? <LoadingOutlined /> : <IoFilmOutline />}
+                placeholder="Gemini giúp bạn tìm film bạn muốn..."
+                prefix={loading ? <LoadingOutlined /> : <SiGooglegemini />}
                 allowClear={false}
                 onChange={handleSearchChange}
-                onKeyDown={(e) => handleKeyDown(e, searchResults, handleMovieSelect, () => handleViewAllResults(movieSearchValue))}
-                className="!w-48 md:!w-96 lg:!w-96 xl:!w-96 2xl:!w-96"
-
+                className="!w-120 !rounded-full !bg-gray-800 !text-white !placeholder-gray-400"
+                ref={inputRef}
               />
               {shouldShowDropdown(movieSearchValue, searchResults?.length > 0 || loading || error) && (
                 <SearchDropdownItem
@@ -102,6 +106,7 @@ const Navbar = () => {
                   selectedIndex={selectedIndex}
                   onMovieSelect={handleMovieSelect}
                   onViewAllResults={() => handleViewAllResults(movieSearchValue)}
+                  searchingService={searchingService}
                 />
               )}
             </div>
