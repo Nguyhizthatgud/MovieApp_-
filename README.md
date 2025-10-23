@@ -1,9 +1,32 @@
 # MovieApp - 时间如水
 
-A modern, feature-rich React movie application demonstrating **AI-powered hybrid search** with dual-layer search strategy (TMDB API + Gemini LLM).  
-Designed for portfolio presentation and educational purposes — showcases how to integrate Large Language Models (LLMs) with traditional APIs to create intelligent, responsive search experiences.
+A modern, feature-rich React movie application demonstrating **AI-powered hybrid search** with dual-layer search strategy (TMDB API + Gemini LLM). Designed with Figma for the UI and Logo Design.
+the project is designed for portfolio presentation and educational purposes — showcases how to integrate Large Language Models (LLMs) with traditional APIs to create intelligent, responsive search experiences.
 
 ---
+
+## Tech Stack
+
+![React](https://img.shields.io/badge/React-18.0-61DAFB?logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-5.0-646CFF?logo=vite&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)
+![Google Gemini](https://img.shields.io/badge/Google%20Gemini-2.5%20Flash-4285F4?logo=google&logoColor=white)
+![Ant Design](https://img.shields.io/badge/Ant%20Design-5.0-0170FE?logo=antdesign&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-3.0-06B6D4?logo=tailwindcss&logoColor=white)
+![TMDB API](https://img.shields.io/badge/TMDB%20API-3.0-01B4E4?logo=themoviedatabase&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-HTTP%20Client-5A29E4?logo=axios&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)
+
+---
+
+### Core Technologies
+
+- **LLM & AI**: Google Gemini 2.5 Flash (intelligent search & data generation)
+- **React 18**: Latest React with concurrent features
+- **FIGMA**: Design for the UI and Logo Design
+- **JavaScript ES6+**: Modern JavaScript features
+- **Vite**: Next-generation build tool for fast development
+- **React Router DOM**: Client-side routing
 
 ## AI & LLM Integration - Key Differentiator
 
@@ -54,6 +77,7 @@ Gemini LLM provides enhanced movie data including:
 
 - **Architecture**: MVC + Feature-Based organization with AI service integration
 - **AI/LLM**: Gemini 2.5 Flash for intelligent fallback search and data generation
+- **Design**: Figma for the UI and Logo Design
 - **Search**: Dual-layer (TMDB + Gemini) with smart caching
 - **Focus**: Maintainability, scalability, testability, intelligent data retrieval
 - **Security**: Environment variable management, API key protection
@@ -85,16 +109,6 @@ Gemini LLM provides enhanced movie data including:
 - **Custom Hooks** and service layer for testable business logic
 
 ---
-
-## Tech Stack 🛠
-
-### Core Technologies
-
-- **LLM & AI**: Google Gemini 2.5 Flash (intelligent search & data generation)
-- **React 18**: Latest React with concurrent features
-- **JavaScript ES6+**: Modern JavaScript features
-- **Vite**: Next-generation build tool for fast development
-- **React Router DOM**: Client-side routing
 
 ### API & Data
 
