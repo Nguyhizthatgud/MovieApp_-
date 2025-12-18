@@ -16,15 +16,11 @@ export const useNowPlaying = (params) => {
             setLoading(true);
             setError(null);
             try {
-                const apiParams = {
-                    api_key: API_CONFIG.API_KEY,
-                    ...params
-                };
-
                 const response = await axios.get(ENDPOINTS.NOW_PLAYING_MOVIES, {
-                    params: apiParams,
+                    params: params,
                     headers: {
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${API_CONFIG.ACCESS_TOKEN}`
                     }
                 });
 
@@ -73,16 +69,11 @@ export const usePopularMovies = (params) => {
             setError(null);
 
             try {
-                // TMDB API uses api_key as query parameter
-                const apiParams = {
-                    api_key: API_CONFIG.API_KEY,
-                    ...params
-                };
-
                 const response = await axios.get(ENDPOINTS.POPULAR_MOVIES, {
-                    params: apiParams,
+                    params: params,
                     headers: {
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${API_CONFIG.ACCESS_TOKEN}`
                     }
                 });
 
@@ -128,16 +119,11 @@ export const useUpcomingMovies = (params) => {
             setError(null);
 
             try {
-                // TMDB API uses api_key as query parameter
-                const apiParams = {
-                    api_key: API_CONFIG.API_KEY,
-                    ...params
-                };
-
                 const response = await axios.get(ENDPOINTS.UPCOMING_MOVIES, {
-                    params: apiParams,
+                    params: params,
                     headers: {
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${API_CONFIG.ACCESS_TOKEN}`
                     }
                 });
 
@@ -190,9 +176,7 @@ export const useGenreMovie = (genreId, params = {}) => {
             setError(null);
 
             try {
-                // build discover params, include with_genres
                 const apiParams = {
-                    api_key: API_CONFIG.API_KEY,
                     with_genres: Array.isArray(genreId) ? genreId.join(',') : String(genreId),
                     page: params.page || 1,
                     language: params.language || 'en-US',
@@ -200,12 +184,13 @@ export const useGenreMovie = (genreId, params = {}) => {
                     ...params
                 };
 
-
                 const endpoint = ENDPOINTS.DISCOVER_MOVIES;
                 const response = await axios.get(endpoint, {
                     params: apiParams,
-                    headers: { Accept: 'application/json' },
-
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${API_CONFIG.ACCESS_TOKEN}`
+                    }
                 });
 
                 if (!response.data || !Array.isArray(response.data.results)) {
