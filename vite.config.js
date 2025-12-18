@@ -5,7 +5,9 @@ import react from '@vitejs/plugin-react-swc'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/MovieApp_-',
+  // Use '/' for Netlify (serves from root)
+  // Use '/MovieApp_-/' for GitHub Pages
+  base: '/',
   publicDir: 'public',
   build: {
     outDir: 'dist'
